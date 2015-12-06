@@ -30,8 +30,6 @@
         parent.removeChild(target);
         var newNode = this.render();
 
-        if (insertElement) console.log(insertElement);
-
         if (insertElement) {
             newTarget = parent.insertBefore(newNode, insertElement);
         } else {
