@@ -19,8 +19,26 @@
 
         var target = this.getTarget();
         var parent = target.parentNode;
+        var insertElement;
+        var newTarget;
+
+        if (parent.childNodes.length > 1) {
+            var insertIndex = [].indexOf.call(parent.childNodes, target);
+            if (insertIndex + 1 < parent.childNodes.length) insertElement = parent.childNodes[insertIndex + 1];
+        }
+
         parent.removeChild(target);
-        this.setTarget(parent.appendChild(this.render()));
+        var newNode = this.render();
+
+        if (insertElement) console.log(insertElement);
+
+        if (insertElement) {
+            newTarget = parent.insertBefore(newNode, insertElement);
+        } else {
+            newTarget = parent.appendChild(newNode);
+        }
+
+        this.setTarget(newTarget);
     }
 
     // ########### ABSTRACT ###########
